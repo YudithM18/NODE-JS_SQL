@@ -37,12 +37,7 @@ module.exports = (sequelize) => {
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    rol: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
+    }
   }, {
     sequelize,
     modelName: 'Usuario', // Nombre en singular

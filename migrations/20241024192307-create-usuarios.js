@@ -21,15 +21,10 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      rol: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE
       }
     });

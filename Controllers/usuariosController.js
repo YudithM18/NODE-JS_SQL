@@ -20,15 +20,20 @@ const obtenerUsuarios = async (req, res) => {
 const crearNuevosUsuarios = async (req, res) => {
   try {
     // Desestructura los datos del cuerpo de la solicitud.
-    const { user_name, gmail, pass, phone, rol } = req.body;
+    const { user_name, gmail, pass, phone } = req.body;
+
+    console.log( user_name, gmail, pass, phone);
+    
     // Crea un nuevo usuario en la base de datos.
     const usuarios = await Usuario.create({
       user_name, 
       gmail, 
       pass, 
-      phone, 
-      rol
+      phone
     });
+
+    console.log(usuarios);
+    
     // Envía el nuevo usuario creado como respuesta con un código de estado 201 (Creado).
     res.status(201).json(usuarios);
   } catch (error) {
@@ -43,7 +48,7 @@ const actualizarUsuarios = async(req, res) => {
     // Obtiene el ID del usuario a actualizar desde los parámetros de la solicitud.
     const { id } = req.params;
     // Desestructura los datos del cuerpo de la solicitud.
-    const { user_name, gmail, pass, phone, rol } = req.body;
+    const { user_name, gmail, pass, phone } = req.body;
     // Busca el usuario por su ID.
     const usuarios = await Usuario.findByPk(id);
     // Si no se encuentra el usuario, envía un mensaje de error con un código de estado 404 (No encontrado).
@@ -52,7 +57,7 @@ const actualizarUsuarios = async(req, res) => {
     }
 
     // Actualiza los datos del usuario encontrado.
-    await usuarios.update({ user_name, gmail, pass, phone, rol });
+    await usuarios.update({ user_name, gmail, pass, phone });
     // Envía el usuario actualizado como respuesta con un código de estado 200.
     res.status(200).json(usuarios);
   } catch (error) {
