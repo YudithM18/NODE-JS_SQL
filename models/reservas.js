@@ -4,50 +4,37 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   class Reserva extends Model {
     static associate(models) {
-      
-    Reserva.hasMany(models.Usuario, { 
-    foreignKey: 'id_usuario',
-    as: 'usuarios',
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-  });
-  Reserva.hasMany(models.Habitacion, {
-    foreignKey: 'id_habitacion',
-    as: 'habitaciones',
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-    });
-
-    Reserva.hasMany(models.Status_reserve, {
-      foreignKey: 'id_status_reserve',
-      as: 'status_reserve',
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL'
-    })
-
+      Reserva.belongsTo(models.Usuario, {
+        foreignKey: 'id_usuario',
+        as: 'usuario',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      });
+      Reserva.hasMany(models.Pagos, {
+        foreignKey: 'id_reserva',
+        as: 'pagos',
+      });
+      Reserva.belongsTo(models.Status_reserve, {
+        foreignKey: 'id_status_reserve',
+        as: 'status_reserve',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      });
     }
   }
+
   Reserva.init({
     id_reserva: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
-      
     },
     id_usuario: {
-      type:DataTypes.INTEGER,
-      allowNull: false,
-      references:{
-        model: 'Usuario',
-        key: 'id',
-      },
-    },
-    id_habitacion: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references:{
-        model: 'Habitacion',
+      references: {
+        model: 'Usuario',
         key: 'id',
       },
     },
@@ -62,15 +49,14 @@ module.exports = (sequelize) => {
     id_status_reserve: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references:{
+      references: {
         model: 'Status_reserve',
         key: 'id',
       },
     },
-
   }, {
     sequelize,
-    modelName: 'Reserva', // Nombre en singular
+    modelName: 'Reserva',
     tableName: 'reservas',
     timestamps: true,
   });

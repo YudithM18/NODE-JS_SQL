@@ -11,6 +11,8 @@ module.exports = (sequelize) => {
     onDelete: 'SET NULL'
   });
 
+
+
     }
   }
   Habitacion.init({
@@ -51,7 +53,3 @@ module.exports = (sequelize) => {
 
   return Habitacion;
 };
-
-
-
-

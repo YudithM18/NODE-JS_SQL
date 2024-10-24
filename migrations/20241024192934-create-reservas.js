@@ -16,13 +16,6 @@ module.exports = {
           key: 'id',
         },
       },
-      id_habitacion: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Habitaciones',
-          key: 'id_habitaciones',
-        },
-      },
       fecha_inicio: {
         type: Sequelize.DATE
       },

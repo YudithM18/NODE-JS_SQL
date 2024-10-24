@@ -36,7 +36,3 @@ module.exports = (sequelize) => {
 
   return Status_room;
 };
-
-
-
-
